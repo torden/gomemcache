@@ -1,0 +1,34 @@
+language: go
+
+go:
+  - "1.8.x"
+  - "1.9.x"
+  - "1.10.x"
+  - "1.11.x"
+  - "tip"
+
+os:
+  - linux
+  - osx
+  - windows
+
+sudo: false
+
+branches:
+  only:
+    - master
+    - develop
+
+services:
+  - memcache
+  - redis-server
+
+script:
+  - go test -v github.com/torden/gomemcache/memcache
+
+matrix:
+  allow_failures:
+    - go: tip
+    - os: windows
+    - go: 1.6
+      os: osx
